@@ -5,12 +5,13 @@ def main():
   TURTLE.hideturtle()
   TURTLE.speed(0)
   radius = 194
-  listofpoints = list()
+  listOfPoints = list()
   showLines(TURTLE , radius)
-  setPoints(TURTLE , radius , listofpoints)
-  print(listofpoints)
-  putstamps(TURTLE , listofpoints)
-  putText(TURTLE , listofpoints)
+  print(listOfPoints)
+  setPoints(TURTLE , radius , listOfPoints)
+  print(listOfPoints)
+  putstamps(TURTLE , listOfPoints)
+  putText(TURTLE , listOfPoints)
   
 def outerCircle(TURTLE , radius):
   TURTLE.penup()
@@ -81,56 +82,53 @@ def mainLineSix(TURTLE , radius):
   TURTLE.pendown()
   TURTLE.forward(2 * radius)
 
-def setPoints(TURTLE , radius , listofpoints):
+def setPoints(TURTLE , radius , listOfPoints):
     TURTLE.penup()
     index = 0
-    TURTLE.home()
     rotation = 0
     rotation1 = 30
     rotation2 = 15
-    for i in range(3):
-        getpoint(TURTLE , listofpoints , rotation , index)
-        index += 1
-        rotatinal += rotation1
-        getpoint(TURTLE , listofpoints , rotation , index)
-        index += 1
-        rotation += rotation2
-        getpoint(TURTLE , listofpoints , rotation , index)
-        index += 1
-        rotation += rotation2
-        getpoint(TURTLE , listofpoints , rotation , index)
-        index += 1
-        rotation += rotation1
     
-    def getpoint(TURTLE , listofpoints , rotation , index):
+    def getpoint(TURTLE , listOfPoints , rotation , index , radius):
         TURTLE.home()
         TURTLE.lt(rotation)
         TURTLE.forward(radius)
-        point = turtle.position()
-        listofpoints.insert(index , point)
-        return listofpoints
+        point = TURTLE.position()
+        listOfPoints.insert(index , point)
+        return listOfPoints
         
+    while rotation < 350:
+        getpoint(TURTLE , listOfPoints , rotation , index , radius)
+        index += 1
+        rotation += rotation1
+        getpoint(TURTLE , listOfPoints , rotation , index , radius)
+        index += 1
+        rotation += rotation2
+        getpoint(TURTLE , listOfPoints , rotation , index , radius)
+        index += 1
+        rotation += rotation2
+        getpoint(TURTLE , listOfPoints , rotation , index , radius)
+        index += 1
+        rotation += rotation1
 
+    return listOfPoints
 
-    
-    
-    
-def putstamps(TURTLE , listofpoints):
+def putstamps(TURTLE , listOfPoints):
     counter = 0
     TURTLE.color("blue")
     while counter <= 14: 
         TURTLE.penup()
-        TURTLE.setposition(listofpoints[counter])
+        TURTLE.setposition(listOfPoints[counter])
         TURTLE.stamp()
         counter += 1
     TURTLE.color("black")
     TURTLE.penup()
     TURTLE.home()
-def putText(TURTLE , listofpoints):
+def putText(TURTLE , listOfPoints):
     point = 0
     text = 0
     while point <= 15:
-        TURTLE.setposition(listofpoints[point])
+        TURTLE.setposition(listOfPoints[point])
         TURTLE.write(f"This is position {text}")
         point += 1
         text += 1
